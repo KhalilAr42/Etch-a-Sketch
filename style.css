@@ -27,6 +27,8 @@ h1 {
 
 .canvas {
     background-color: #fffffe;
+    display: flex;
+    flex-wrap: wrap;
     width: 500px;
     height: 500px;
 }
