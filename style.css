@@ -37,6 +37,15 @@ h1 {
     width: 95%;
 }
 
+.btn {
+    padding: 16px 32px;
+    width: 180px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
 input[type="range"] {
     /* removing default appearance */
     -webkit-appearance: none;
@@ -77,8 +86,13 @@ input[type="range"]::-moz-range-thumb {
     background-color: #fffffe;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     width: 500px;
     height: 500px;
+}
+
+.square {
+    outline: 1px dotted lightgrey;
 }
 
 footer {

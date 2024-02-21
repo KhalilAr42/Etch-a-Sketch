@@ -1,5 +1,6 @@
 const divCanvas = document.querySelector("#canvas");
 const inputGridSize = document.querySelector('input[type="range"]');
+const buttonGridSetting = document.querySelector("#gridSetting");
 
 let gridSize = 16;
 let numberOfSquares = gridSize * gridSize;
@@ -30,14 +31,35 @@ function removeAllChildNodes(parent) {
 
 generateGrid(numberOfSquares);
 
+function toggleOutline() {
+    const squares = divCanvas.querySelectorAll("div");
+    squares.forEach((square) => {
+        square.classList.toggle("square");
+    });
+}
+
 inputGridSize.addEventListener("change", (event) => {
     gridSize = event.target.value;
     numberOfSquares = gridSize * gridSize;
     removeAllChildNodes(divCanvas);
     generateGrid(numberOfSquares);
+    buttonGridSetting.textContent = "Show grid";
+    buttonGridSetting.value = "OFF";
 });
 
 divCanvas.addEventListener("mousemove", (event) => {
     let target = event.target;
     target.style.backgroundColor = "black";
+});
+
+buttonGridSetting.addEventListener("click", (event) => {
+    if (buttonGridSetting.value == "OFF") {
+        buttonGridSetting.textContent = "Remove grid";
+        toggleOutline();
+        buttonGridSetting.value = "ON";
+    } else {
+        buttonGridSetting.textContent = "Show grid";
+        toggleOutline();
+        buttonGridSetting.value = "OFF";
+    }
 });
