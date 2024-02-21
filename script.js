@@ -1,4 +1,5 @@
 const divCanvas = document.querySelector("#canvas");
+const inputGridSize = document.querySelector('input[type="range"]');
 
 let gridSize = 16;
 let numberOfSquares = gridSize * gridSize;
@@ -21,7 +22,21 @@ function generateGrid(numberOfSquares) {
     }
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 generateGrid(numberOfSquares);
+
+inputGridSize.addEventListener("change", (event) => {
+    gridSize = event.target.value;
+    numberOfSquares = gridSize * gridSize;
+    removeAllChildNodes(divCanvas);
+    generateGrid(numberOfSquares);
+});
+
 divCanvas.addEventListener("mousemove", (event) => {
     let target = event.target;
     target.style.backgroundColor = "black";

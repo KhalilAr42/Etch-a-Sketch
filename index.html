@@ -21,7 +21,19 @@
     <body>
         <h1>Etch-a-Sketch</h1>
         <div class="container">
-            <div class="settings"></div>
+            <div class="settings">
+                <div class="size-settings">
+                    <label for="gridSize"> Size of the grid : 16x16 </label>
+                    <input
+                        type="range"
+                        min="16"
+                        max="32"
+                        value="16"
+                        step="1"
+                        id="gridSize"
+                    />
+                </div>
+            </div>
             <div class="canvas" id="canvas"></div>
         </div>
         <footer>
