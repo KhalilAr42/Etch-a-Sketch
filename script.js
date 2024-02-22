@@ -1,9 +1,11 @@
 const divCanvas = document.querySelector("#canvas");
 const inputGridSize = document.querySelector('input[type="range"]');
 const buttonGridSetting = document.querySelector("#gridSetting");
+const squares = divCanvas.querySelectorAll("div");
 
 let gridSize = 16;
 let numberOfSquares = gridSize * gridSize;
+let color = "black";
 
 function getCanvasArea() {
     return divCanvas.offsetWidth * divCanvas.offsetHeight;
@@ -31,11 +33,26 @@ function removeAllChildNodes(parent) {
 
 generateGrid(numberOfSquares);
 
-function toggleOutline() {
-    const squares = divCanvas.querySelectorAll("div");
-    squares.forEach((square) => {
-        square.classList.toggle("square");
+function colorSquare(square, color) {
+    square.style.backgroundColor = color;
+}
+
+divCanvas.addEventListener("mousedown", (event) => {
+    event.preventDefault();
+    let target = event.target;
+    colorSquare(target, color);
+    divCanvas.addEventListener("mousemove", (event) =>
+        mouseMoveHandler(event, color)
+    );
+    divCanvas.addEventListener("mouseup", function () {
+        divCanvas.removeEventListener("mousemove", mouseMoveHandler);
     });
+});
+
+function mouseMoveHandler(event, color) {
+    if (event.buttons === 1) {
+        event.target.style.backgroundColor = color;
+    }
 }
 
 inputGridSize.addEventListener("change", (event) => {
@@ -47,19 +64,19 @@ inputGridSize.addEventListener("change", (event) => {
     buttonGridSetting.value = "OFF";
 });
 
-divCanvas.addEventListener("mousemove", (event) => {
-    let target = event.target;
-    target.style.backgroundColor = "black";
-});
+function toggleOutline() {
+    squares.forEach((square) => {
+        square.classList.toggle("square");
+    });
+}
 
 buttonGridSetting.addEventListener("click", (event) => {
+    toggleOutline();
     if (buttonGridSetting.value == "OFF") {
         buttonGridSetting.textContent = "Remove grid";
-        toggleOutline();
         buttonGridSetting.value = "ON";
     } else {
         buttonGridSetting.textContent = "Show grid";
-        toggleOutline();
         buttonGridSetting.value = "OFF";
     }
 });
