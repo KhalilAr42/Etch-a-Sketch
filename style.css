@@ -9,6 +9,9 @@ body {
     flex-direction: column;
     justify-content: space-between;
     background-color: #cce7ff;
+    cursor: url("https://icons.iconarchive.com/icons/pictogrammers/material/256/eraser-icon.png")
+            25 25,
+        default;
 }
 
 h1 {
@@ -16,9 +19,9 @@ h1 {
     font-family: "Caveat", cursive;
     font-optical-sizing: auto;
     font-style: normal;
-    font-size: 120px;
+    font-size: 90px;
     margin: 0;
-    margin-top: 32px;
+    margin-top: 64px;
 }
 
 .container {
@@ -175,11 +178,6 @@ a:visited {
 
 .social-icon {
     color: #2d334a;
-}
-
-#clearCanvas:active {
-    background-color: #ffa556;
-    color: white;
 }
 
 label[for="gridSize"] {

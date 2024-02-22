@@ -113,48 +113,30 @@ buttonClearCanvas.addEventListener("click", () => {
     squares.forEach((square) => {
         square.style.backgroundColor = "white";
     });
-    if (isPixelArt) {
-        buttonPixelArt.classList.toggle("active");
-        isPixelArt = false;
-    }
-
-    if (isColorRandom) {
-        buttonRandomColor.classList.toggle("active");
-        isColorRandom = false;
-    }
-
-    if (isEraser) {
-        buttonEraser.classList.toggle("active");
-        isEraser = false;
-    }
+    buttonPixelArt.classList.remove("active");
+    buttonEraser.classList.remove("active");
+    buttonRandomColor.classList.remove("active");
+    isEraser = false;
+    isPixelArt = false;
+    isColorRandom = false;
 });
 
 buttonRandomColor.addEventListener("click", () => {
-    if (isEraser || isPixelArt) {
-        buttonRandomColor.removeEventListener("click");
-    }
-    buttonRandomColor.classList.toggle("active");
-    if (buttonRandomColor.value == "OFF") {
-        buttonRandomColor.value = "ON";
-        isColorRandom = true;
-    } else {
-        buttonRandomColor.value = "OFF";
-        isColorRandom = false;
-    }
+    buttonRandomColor.classList.add("active");
+    isEraser = false;
+    isPixelArt = false;
+    isColorRandom = true;
+    buttonEraser.classList.remove("active");
+    buttonPixelArt.classList.remove("active");
 });
 
 buttonEraser.addEventListener("click", () => {
-    if (isColorRandom || isPixelArt) {
-        buttonEraser.removeEventListener("click");
-    }
-    buttonEraser.classList.toggle("active");
-    if (buttonEraser.value == "OFF") {
-        buttonEraser.value = "ON";
-        isEraser = true;
-    } else {
-        buttonEraser.value = "OFF";
-        isEraser = false;
-    }
+    buttonEraser.classList.add("active");
+    isEraser = true;
+    isPixelArt = false;
+    isColorRandom = false;
+    buttonPixelArt.classList.remove("active");
+    buttonRandomColor.classList.remove("active");
 });
 
 function generatePixelArt() {
@@ -166,25 +148,21 @@ function generatePixelArt() {
 }
 
 buttonPixelArt.addEventListener("click", () => {
-    if (isEraser || isColorRandom) {
-        buttonPixelArt.removeEventListener("click");
-    }
-
-    buttonPixelArt.classList.toggle("active");
-    if (buttonPixelArt.value == "OFF") {
-        generatePixelArt();
-        buttonPixelArt.value = "ON";
-        isPixelArt = true;
-    } else {
-        const squares = document.querySelectorAll("#square");
-        squares.forEach((square) => {
-            square.style.backgroundColor = "white";
-        });
-        buttonPixelArt.value = "OFF";
-        isPixelArt = false;
-    }
+    buttonPixelArt.classList.add("active");
+    isEraser = false;
+    isPixelArt = true;
+    generatePixelArt();
+    isColorRandom = false;
+    buttonEraser.classList.remove("active");
+    buttonRandomColor.classList.remove("active");
 });
 
 inputColor.addEventListener("change", (event) => {
+    buttonPixelArt.classList.remove("active");
+    buttonEraser.classList.remove("active");
+    buttonRandomColor.classList.remove("active");
+    isEraser = false;
+    isPixelArt = false;
+    isColorRandom = false;
     color = event.target.value;
 });
