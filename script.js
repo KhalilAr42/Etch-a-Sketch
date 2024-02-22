@@ -19,6 +19,7 @@ function generateGrid(numberOfSquares) {
     for (let index = 0; index < numberOfSquares; index++) {
         let dimension = getGridSquaresDimension(numberOfSquares);
         const square = document.createElement("div");
+        square.id = "square";
         square.style.width = dimension.toString() + "px";
         square.style.height = dimension.toString() + "px";
         divCanvas.appendChild(square);
@@ -65,6 +66,7 @@ inputGridSize.addEventListener("change", (event) => {
 });
 
 function toggleOutline() {
+    const squares = document.querySelectorAll("#square");
     squares.forEach((square) => {
         square.classList.toggle("square");
     });
