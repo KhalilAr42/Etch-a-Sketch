@@ -3,6 +3,7 @@ const inputGridSize = document.querySelector('input[type="range"]');
 const buttonGridSetting = document.querySelector("#gridSetting");
 const buttonClearCanvas = document.querySelector("#clearCanvas");
 const buttonRandomColor = document.querySelector("#randomColor");
+const buttonEraser = document.querySelector("#eraser");
 
 const CANVAS_AREA = divCanvas.offsetWidth * divCanvas.offsetHeight;
 
@@ -11,15 +12,18 @@ let numberOfSquares = gridSize * gridSize;
 let color = "black";
 let isColorRandom = false;
 let isMouseDown = false;
+let isEraser = false;
 
 function getGridSquaresDimension(numberOfSquares) {
     return Math.sqrt(CANVAS_AREA / numberOfSquares);
 }
 
 function colorSquares(square, color) {
-    if (isColorRandom) {
+    if (isColorRandom && !isEraser) {
         var randomColor = Math.floor(Math.random() * 16777215).toString(16);
         square.style.backgroundColor = "#" + randomColor;
+    } else if (isEraser) {
+        square.style.backgroundColor = "white";
     } else {
         square.style.backgroundColor = color;
     }
@@ -114,5 +118,17 @@ buttonRandomColor.addEventListener("click", () => {
         buttonRandomColor.textContent = "Random Color : OFF";
         buttonRandomColor.value = "OFF";
         isColorRandom = false;
+    }
+});
+
+buttonEraser.addEventListener("click", () => {
+    if (buttonEraser.value == "OFF") {
+        buttonEraser.textContent = "Eraser : ON";
+        buttonEraser.value = "ON";
+        isEraser = true;
+    } else {
+        buttonEraser.textContent = "Eraser : OFF";
+        buttonEraser.value = "OFF";
+        isEraser = false;
     }
 });
