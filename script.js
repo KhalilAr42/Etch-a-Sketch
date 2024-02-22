@@ -4,6 +4,7 @@ const buttonGridSetting = document.querySelector("#gridSetting");
 const buttonClearCanvas = document.querySelector("#clearCanvas");
 const buttonRandomColor = document.querySelector("#randomColor");
 const buttonEraser = document.querySelector("#eraser");
+const buttonPixelArt = document.querySelector("#pixelArt");
 
 const CANVAS_AREA = divCanvas.offsetWidth * divCanvas.offsetHeight;
 
@@ -132,3 +133,13 @@ buttonEraser.addEventListener("click", () => {
         isEraser = false;
     }
 });
+
+function generatePixelArt() {
+    const squares = document.querySelectorAll("#square");
+    squares.forEach((square) => {
+        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        square.style.backgroundColor = "#" + randomColor;
+    });
+}
+
+buttonPixelArt.addEventListener("click", generatePixelArt);
