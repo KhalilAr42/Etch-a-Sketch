@@ -113,6 +113,20 @@ buttonClearCanvas.addEventListener("click", () => {
     squares.forEach((square) => {
         square.style.backgroundColor = "white";
     });
+    if (isPixelArt) {
+        buttonPixelArt.classList.toggle("active");
+        isPixelArt = false;
+    }
+
+    if (isColorRandom) {
+        buttonRandomColor.classList.toggle("active");
+        isColorRandom = false;
+    }
+
+    if (isEraser) {
+        buttonEraser.classList.toggle("active");
+        isEraser = false;
+    }
 });
 
 buttonRandomColor.addEventListener("click", () => {

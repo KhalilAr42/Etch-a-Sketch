@@ -187,3 +187,10 @@ label[for="gridSize"] {
     font-weight: 600;
     margin-bottom: 15px;
 }
+
+.text {
+    font-family: lato;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+}
