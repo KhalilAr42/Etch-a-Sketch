@@ -1,7 +1,7 @@
 const divCanvas = document.querySelector("#canvas");
 const inputGridSize = document.querySelector('input[type="range"]');
 const buttonGridSetting = document.querySelector("#gridSetting");
-const squares = divCanvas.querySelectorAll("div");
+const buttonClearCanvas = document.querySelector("#clearCanvas");
 
 let gridSize = 16;
 let numberOfSquares = gridSize * gridSize;
@@ -81,4 +81,11 @@ buttonGridSetting.addEventListener("click", (event) => {
         buttonGridSetting.textContent = "Show grid";
         buttonGridSetting.value = "OFF";
     }
+});
+
+buttonClearCanvas.addEventListener("click", () => {
+    const squares = document.querySelectorAll("#square");
+    squares.forEach((square) => {
+        square.style.backgroundColor = "white";
+    });
 });
