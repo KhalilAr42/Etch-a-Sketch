@@ -5,6 +5,7 @@ const buttonClearCanvas = document.querySelector("#clearCanvas");
 const buttonRandomColor = document.querySelector("#randomColor");
 const buttonEraser = document.querySelector("#eraser");
 const buttonPixelArt = document.querySelector("#pixelArt");
+const inputColor = document.querySelector("#color");
 
 const CANVAS_AREA = divCanvas.offsetWidth * divCanvas.offsetHeight;
 
@@ -143,3 +144,7 @@ function generatePixelArt() {
 }
 
 buttonPixelArt.addEventListener("click", generatePixelArt);
+
+inputColor.addEventListener("change", (event) => {
+    color = event.target.value;
+});

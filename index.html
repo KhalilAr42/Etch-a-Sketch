@@ -16,15 +16,25 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
         <title>Etch-a-Sketch</title>
     </head>
     <body>
         <h1>Etch-a-Sketch</h1>
         <div class="container">
             <div class="settings">
-                <button class="btn" id="pixelArt">
-                    Generate your random pixel art !
-                </button>
+                <div class="color-settings">
+                    <input
+                        class="rounded-color-input"
+                        type="color"
+                        id="color"
+                    />
+                </div>
 
                 <button class="btn" id="eraser" value="OFF">
                     Eraser : OFF
@@ -34,6 +44,13 @@
                     Random Color : OFF
                 </button>
 
+                <button class="btn" id="pixelArt">
+                    Generate your random Pixel Art !
+                </button>
+            </div>
+            <div class="canvas" id="canvas"></div>
+
+            <div class="settings">
                 <button class="btn" id="gridSetting" value="OFF">
                     Show grid
                 </button>
@@ -52,21 +69,21 @@
 
                 <button class="btn" id="clearCanvas">Clear Canvas</button>
             </div>
-            <div class="canvas" id="canvas"></div>
         </div>
+
         <footer>
             <p class="full-text">A website made by Khalil Archkak</p>
             <div class="socials">
                 <a href="https://twitter.com/KhalilAr42" target="_blank"
-                    ><i class="fa-brands fa-x-twitter fa-l social-icon"></i
+                    ><i class="fa-brands fa-x-twitter fa-xl social-icon"></i
                 ></a>
                 <a
                     href="https://www.linkedin.com/in/khalilarchkak/"
                     target="_blank"
-                    ><i class="fa-brands fa-linkedin-in fa-l social-icon"></i
+                    ><i class="fa-brands fa-linkedin-in fa-xl social-icon"></i
                 ></a>
                 <a href="https://github.com/KhalilAr42" target="_blank"
-                    ><i class="fa-brands fa-github fa-l social-icon"></i
+                    ><i class="fa-brands fa-github fa-xl social-icon"></i
                 ></a>
             </div>
         </footer>
