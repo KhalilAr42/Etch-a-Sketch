@@ -22,12 +22,18 @@
             href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap"
             rel="stylesheet"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+            rel="stylesheet"
+        />
         <title>Etch-a-Sketch</title>
     </head>
     <body>
         <h1>Etch-a-Sketch</h1>
         <div class="container">
-            <div class="settings">
+            <div class="tools">
                 <div class="color-settings">
                     <input
                         class="rounded-color-input"
@@ -36,21 +42,19 @@
                     />
                 </div>
 
-                <button class="btn" id="eraser" value="OFF">
-                    Eraser : OFF
-                </button>
+                <button class="btn" id="eraser" value="OFF">Eraser</button>
 
                 <button class="btn" id="randomColor" value="OFF">
-                    Random Color : OFF
+                    Random Color
                 </button>
 
-                <button class="btn" id="pixelArt">
-                    Generate your random Pixel Art !
+                <button class="btn" id="pixelArt" value="OFF">
+                    Generate your Pixel Art !
                 </button>
             </div>
             <div class="canvas" id="canvas"></div>
 
-            <div class="settings">
+            <div class="canvas-settings">
                 <button class="btn" id="gridSetting" value="OFF">
                     Show grid
                 </button>

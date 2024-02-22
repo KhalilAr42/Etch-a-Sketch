@@ -6,6 +6,7 @@ const buttonRandomColor = document.querySelector("#randomColor");
 const buttonEraser = document.querySelector("#eraser");
 const buttonPixelArt = document.querySelector("#pixelArt");
 const inputColor = document.querySelector("#color");
+const labelForGridSize = document.querySelector('label[for="gridSize"]');
 
 const CANVAS_AREA = divCanvas.offsetWidth * divCanvas.offsetHeight;
 
@@ -15,6 +16,7 @@ let color = "black";
 let isColorRandom = false;
 let isMouseDown = false;
 let isEraser = false;
+let isPixelArt = false;
 
 function getGridSquaresDimension(numberOfSquares) {
     return Math.sqrt(CANVAS_AREA / numberOfSquares);
@@ -84,6 +86,9 @@ inputGridSize.addEventListener("change", (event) => {
     generateGrid(numberOfSquares);
     buttonGridSetting.textContent = "Show grid";
     buttonGridSetting.value = "OFF";
+    buttonGridSetting.classList.remove("active");
+    labelForGridSize.textContent =
+        "Size of the grid :" + gridSize + "x" + gridSize + "";
 });
 
 function toggleOutline() {
@@ -95,11 +100,10 @@ function toggleOutline() {
 
 buttonGridSetting.addEventListener("click", (event) => {
     toggleOutline();
+    buttonGridSetting.classList.toggle("active");
     if (buttonGridSetting.value == "OFF") {
-        buttonGridSetting.textContent = "Remove grid";
         buttonGridSetting.value = "ON";
     } else {
-        buttonGridSetting.textContent = "Show grid";
         buttonGridSetting.value = "OFF";
     }
 });
@@ -112,24 +116,28 @@ buttonClearCanvas.addEventListener("click", () => {
 });
 
 buttonRandomColor.addEventListener("click", () => {
+    if (isEraser || isPixelArt) {
+        buttonRandomColor.removeEventListener("click");
+    }
+    buttonRandomColor.classList.toggle("active");
     if (buttonRandomColor.value == "OFF") {
-        buttonRandomColor.textContent = "Random Color : ON";
         buttonRandomColor.value = "ON";
         isColorRandom = true;
     } else {
-        buttonRandomColor.textContent = "Random Color : OFF";
         buttonRandomColor.value = "OFF";
         isColorRandom = false;
     }
 });
 
 buttonEraser.addEventListener("click", () => {
+    if (isColorRandom || isPixelArt) {
+        buttonEraser.removeEventListener("click");
+    }
+    buttonEraser.classList.toggle("active");
     if (buttonEraser.value == "OFF") {
-        buttonEraser.textContent = "Eraser : ON";
         buttonEraser.value = "ON";
         isEraser = true;
     } else {
-        buttonEraser.textContent = "Eraser : OFF";
         buttonEraser.value = "OFF";
         isEraser = false;
     }
@@ -143,7 +151,25 @@ function generatePixelArt() {
     });
 }
 
-buttonPixelArt.addEventListener("click", generatePixelArt);
+buttonPixelArt.addEventListener("click", () => {
+    if (isEraser || isColorRandom) {
+        buttonPixelArt.removeEventListener("click");
+    }
+
+    buttonPixelArt.classList.toggle("active");
+    if (buttonPixelArt.value == "OFF") {
+        generatePixelArt();
+        buttonPixelArt.value = "ON";
+        isPixelArt = true;
+    } else {
+        const squares = document.querySelectorAll("#square");
+        squares.forEach((square) => {
+            square.style.backgroundColor = "white";
+        });
+        buttonPixelArt.value = "OFF";
+        isPixelArt = false;
+    }
+});
 
 inputColor.addEventListener("change", (event) => {
     color = event.target.value;

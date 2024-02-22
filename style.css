@@ -1,10 +1,14 @@
+html {
+    font-family: "Lato", cursive;
+    font-optical-sizing: auto;
+}
 body {
     margin: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: aliceblue;
+    background-color: #cce7ff;
 }
 
 h1 {
@@ -24,9 +28,10 @@ h1 {
     gap: 64px;
 }
 
-.settings {
-    background-color: #d3d3d3;
-    width: 200px;
+.tools,
+.canvas-settings {
+    background-color: #f0f8ff;
+    width: 350px;
     height: 500px;
     border-radius: 12px;
     display: flex;
@@ -35,18 +40,34 @@ h1 {
     justify-content: space-evenly;
 }
 
+.canvas-settings {
+    justify-content: center;
+    gap: 64px;
+}
+
 .size-settings,
 .color-settings {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 95%;
+    width: 80%;
 }
 
 .btn {
-    padding: 16px 32px;
-    width: 180px;
+    padding: 16px 16px;
+    width: 80%;
+    font-family: inherit;
+    font-size: 16px;
+    background-color: #fff7f0;
+    border: solid 2px black;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.active {
+    background-color: #ffa556;
+    color: white;
 }
 
 .btn:hover {
@@ -96,7 +117,7 @@ input[type="range"]::-webkit-slider-thumb {
     background-color: #fff;
     border-radius: 50%;
     border: 2px solid rgb(0, 0, 0);
-    box-shadow: -407px 0 0 400px #313131;
+    box-shadow: -407px 0 0 400px #ffa556;
 }
 
 input[type="range"]::-moz-range-thumb {
@@ -122,11 +143,16 @@ input[type="range"]::-moz-range-thumb {
 }
 
 footer {
-    background-color: #f3f1f1;
+    background-color: #f0f8ff;
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 69px;
+    font-family: inherit;
+}
+
+footer p {
+    font-size: 20px;
 }
 
 a:visited {
@@ -149,4 +175,15 @@ a:visited {
 
 .social-icon {
     color: #2d334a;
+}
+
+#clearCanvas:active {
+    background-color: #ffa556;
+    color: white;
+}
+
+label[for="gridSize"] {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
