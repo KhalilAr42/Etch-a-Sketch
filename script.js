@@ -2,57 +2,72 @@ const divCanvas = document.querySelector("#canvas");
 const inputGridSize = document.querySelector('input[type="range"]');
 const buttonGridSetting = document.querySelector("#gridSetting");
 const buttonClearCanvas = document.querySelector("#clearCanvas");
+const buttonRandomColor = document.querySelector("#randomColor");
+
+const CANVAS_AREA = divCanvas.offsetWidth * divCanvas.offsetHeight;
 
 let gridSize = 16;
 let numberOfSquares = gridSize * gridSize;
 let color = "black";
-
-function getCanvasArea() {
-    return divCanvas.offsetWidth * divCanvas.offsetHeight;
-}
+let isColorRandom = false;
+let isMouseDown = false;
 
 function getGridSquaresDimension(numberOfSquares) {
-    return Math.sqrt(getCanvasArea() / numberOfSquares);
+    return Math.sqrt(CANVAS_AREA / numberOfSquares);
+}
+
+function colorSquares(square, color) {
+    if (isColorRandom) {
+        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        square.style.backgroundColor = "#" + randomColor;
+    } else {
+        square.style.backgroundColor = color;
+    }
 }
 
 function generateGrid(numberOfSquares) {
     for (let index = 0; index < numberOfSquares; index++) {
         let dimension = getGridSquaresDimension(numberOfSquares);
+
         const square = document.createElement("div");
-        square.id = "square";
+
+        square.draggable = false;
         square.style.width = dimension.toString() + "px";
         square.style.height = dimension.toString() + "px";
+        square.id = "square";
+
         divCanvas.appendChild(square);
+
+        square.addEventListener("mousedown", (event) => {
+            event.preventDefault();
+            colorSquares(square, color);
+            isMouseDown = true;
+        });
+
+        square.addEventListener("mouseup", () => (isMouseDown = false));
+
+        square.addEventListener("mouseover", (event) => {
+            if (isMouseDown) {
+                colorSquares(square, color);
+            } else {
+                square.removeEventListener("mouseover", colorSquares);
+            }
+        });
     }
 }
+
+divCanvas.addEventListener("mouseleave", () => {
+    const squares = document.querySelectorAll("#square");
+    squares.forEach((square) => {
+        isMouseDown = false;
+    });
+});
+
+generateGrid(numberOfSquares);
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
-    }
-}
-
-generateGrid(numberOfSquares);
-
-function colorSquare(square, color) {
-    square.style.backgroundColor = color;
-}
-
-divCanvas.addEventListener("mousedown", (event) => {
-    event.preventDefault();
-    let target = event.target;
-    colorSquare(target, color);
-    divCanvas.addEventListener("mousemove", (event) =>
-        mouseMoveHandler(event, color)
-    );
-    divCanvas.addEventListener("mouseup", function () {
-        divCanvas.removeEventListener("mousemove", mouseMoveHandler);
-    });
-});
-
-function mouseMoveHandler(event, color) {
-    if (event.buttons === 1) {
-        event.target.style.backgroundColor = color;
     }
 }
 
@@ -88,4 +103,16 @@ buttonClearCanvas.addEventListener("click", () => {
     squares.forEach((square) => {
         square.style.backgroundColor = "white";
     });
+});
+
+buttonRandomColor.addEventListener("click", () => {
+    if (buttonRandomColor.value == "OFF") {
+        buttonRandomColor.textContent = "Random Color : ON";
+        buttonRandomColor.value = "ON";
+        isColorRandom = true;
+    } else {
+        buttonRandomColor.textContent = "Random Color : OFF";
+        buttonRandomColor.value = "OFF";
+        isColorRandom = false;
+    }
 });
